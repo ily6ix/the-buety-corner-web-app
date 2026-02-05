@@ -1,20 +1,39 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
 
-# Run and deploy your AI Studio app
+# The BEAUTY CORNER - Professional Salon Web Application
 
-This contains everything you need to run your app locally.
+A premium, modern beauty salon digital experience built with React and Tailwind CSS. This application provides a seamless journey from inspiration to appointment.
 
-View your app in AI Studio: https://ai.studio/apps/drive/12hlCuNjIVxjGm-4GhRp5uKfP_OzEb7nm
+## 📱 Page Overview
 
-## Run Locally
+### 1. Home Page (`App.tsx` - Root)
+The digital storefront of the salon. It serves as an orchestration of the brand's best features:
+- **Hero Section**: High-impact visual introduction with clear call-to-actions.
+- **Featured Services**: A curated selection of the most popular treatments to drive quick conversions.
+- **About Teaser**: A brief window into the salon's luxury philosophy.
+- **Integrated Booking**: A full multi-step booking engine located at the bottom of the landing page for accessibility.
 
-**Prerequisites:**  Node.js
+### 2. Services Page (`pages/ServicesPage.tsx`)
+A comprehensive, categorized catalog of every treatment offered at the salon:
+- **Categorization**: Grouped into Nails, Skin, Hair, and Brows for easy navigation.
+- **Localized Pricing**: All costs are displayed in South African Rand (R/ZAR).
+- **Service Details**: Includes duration, price, and a detailed description of the premium products used.
+- **Direct Conversion**: Each service card features a "Book Now" link that scrolls the user to the reservation system.
 
+### 3. About Page (`pages/AboutPage.tsx`)
+The heart of the brand. This page builds trust and establishes authority:
+- **Heritage**: Tells the story of the salon's 2018 founding in Sandton.
+- **Philosophy**: Breaks down the three pillars of the brand: Pure (products), Bespoke (service), and Mastery (skill).
+- **The Artisans**: Introduces the master technicians with professional profiles, humanizing the luxury experience.
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## 🛠️ Core Systems
+
+### Online Booking System (`components/Booking.tsx`)
+A custom-built, three-step reservation engine:
+1. **Service Selection**: Visual selection of treatments with price feedback.
+2. **Date & Time**: Intelligent scheduling with date validation and time-slot selection.
+3. **Client Details**: Secure capture of contact information with a simulated confirmation state.
+
+## 🎨 Design Language
+- **Typography**: `Playfair Display` (Serif) for headings to convey luxury; `Inter` (Sans) for body text for readability.
+- **Palette**: A sophisticated mix of Charcoal (`#1a1a1a`), Champagne Gold (`#c5a47e`), and Bone White (`#faf9f6`).
+- **Aesthetics**: "Quiet Luxury" with generous whitespace, subtle animations, and high-fidelity imagery.

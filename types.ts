@@ -16,8 +16,3 @@ export interface BookingData {
   customerEmail: string;
   customerPhone: string;
 }
-
-export interface ChatMessage {
-  role: 'user' | 'model';
-  text: string;
-}

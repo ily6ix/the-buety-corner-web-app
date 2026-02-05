@@ -2,7 +2,11 @@
 import React from 'react';
 import { SERVICES } from '../constants';
 
-const ServicesPage: React.FC = () => {
+interface ServicesPageProps {
+  onBook: () => void;
+}
+
+const ServicesPage: React.FC<ServicesPageProps> = ({ onBook }) => {
   const categories = Array.from(new Set(SERVICES.map(s => s.category)));
 
   return (
@@ -34,7 +38,12 @@ const ServicesPage: React.FC = () => {
                   <p className="text-[#666] text-sm mb-6 leading-relaxed">{service.description}</p>
                   <div className="flex items-center justify-between mt-auto pt-4 border-t border-[#eee]">
                     <span className="text-xs uppercase tracking-widest text-[#999]">{service.duration}</span>
-                    <a href="#booking" className="text-xs font-bold uppercase tracking-widest text-[#c5a47e] hover:text-[#1a1a1a] transition-colors">Book Now</a>
+                    <button 
+                      onClick={onBook}
+                      className="text-xs font-bold uppercase tracking-widest text-[#c5a47e] hover:text-[#1a1a1a] transition-colors"
+                    >
+                      Book Now
+                    </button>
                   </div>
                 </div>
               ))}
@@ -46,12 +55,12 @@ const ServicesPage: React.FC = () => {
       {/* CTA */}
       <div className="bg-white py-24 text-center border-t border-[#eee]">
         <h2 className="text-4xl font-serif mb-8 text-[#1a1a1a]">Ready to Glow?</h2>
-        <a 
-          href="#booking" 
+        <button 
+          onClick={onBook}
           className="bg-[#1a1a1a] text-white px-12 py-4 rounded-full text-lg font-medium hover:bg-[#c5a47e] transition-all inline-block shadow-lg"
         >
           Schedule Your Session
-        </a>
+        </button>
       </div>
     </div>
   );

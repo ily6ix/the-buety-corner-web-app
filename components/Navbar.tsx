@@ -1,34 +1,24 @@
 
 import React, { useState } from 'react';
+import { PageType } from '../App';
 
 interface NavbarProps {
-  onNavigate: (page: 'home' | 'services') => void;
-  currentPage: 'home' | 'services';
+  onNavigate: (page: PageType) => void;
+  currentPage: PageType;
 }
 
 const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const links = [
+  const links: { name: string; href: string; page: PageType }[] = [
     { name: 'Home', href: '#', page: 'home' },
     { name: 'Services', href: '#services', page: 'services' },
-    { name: 'About', href: '#about', page: 'home' },
-    { name: 'Consultant', href: '#ai-consultant', page: 'home' },
-    { name: 'Contact', href: '#contact', page: 'home' },
+    { name: 'About', href: '#about', page: 'about' },
   ];
 
-  const handleLinkClick = (e: React.MouseEvent, page: 'home' | 'services', href: string) => {
-    if (page !== currentPage) {
-      e.preventDefault();
-      onNavigate(page);
-      // Wait for navigation then scroll
-      setTimeout(() => {
-        if (href.startsWith('#') && href !== '#') {
-          const el = document.querySelector(href);
-          el?.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 0);
-    }
+  const handleLinkClick = (e: React.MouseEvent, page: PageType) => {
+    e.preventDefault();
+    onNavigate(page);
     setIsOpen(false);
   };
 
@@ -37,7 +27,9 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-20 items-center">
           <div className="flex-shrink-0 cursor-pointer" onClick={() => onNavigate('home')}>
-            <span className="text-2xl font-serif tracking-tighter font-bold uppercase text-[#1a1a1a]">The BEAUTY <span className="text-[#c5a47e]">CORNER</span></span>
+            <span className="text-2xl font-serif tracking-tighter font-bold uppercase text-[#1a1a1a]">
+              The BEAUTY <span className="text-[#c5a47e]">CORNER</span>
+            </span>
           </div>
           
           <div className="hidden md:block">
@@ -46,20 +38,24 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage }) => {
                 <a
                   key={link.name}
                   href={link.href}
-                  onClick={(e) => handleLinkClick(e, link.page as any, link.href)}
-                  className={`text-sm font-medium hover:text-[#c5a47e] transition-colors duration-200 ${
-                    currentPage === link.page && link.name === 'Home' ? 'text-[#c5a47e]' : ''
-                  }`}
+                  onClick={(e) => handleLinkClick(e, link.page)}
+                  className={`text-sm font-medium transition-colors duration-200 ${
+                    currentPage === link.page 
+                    ? 'text-[#c5a47e] border-b-2 border-[#c5a47e]' 
+                    : 'text-[#1a1a1a] hover:text-[#c5a47e]'
+                  } pb-1`}
                 >
                   {link.name}
                 </a>
               ))}
-              <a
-                href="#booking"
-                className="bg-[#1a1a1a] text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-[#333] transition-all"
+              <button
+                onClick={() => onNavigate('booking')}
+                className={`bg-[#1a1a1a] text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-[#333] transition-all ${
+                  currentPage === 'booking' ? 'ring-2 ring-[#c5a47e] ring-offset-2' : ''
+                }`}
               >
                 Book Now
-              </a>
+              </button>
             </div>
           </div>
 
@@ -84,19 +80,23 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage }) => {
               <a
                 key={link.name}
                 href={link.href}
-                className="block px-3 py-2 text-base font-medium hover:bg-[#faf9f6]"
-                onClick={(e) => handleLinkClick(e, link.page as any, link.href)}
+                className={`block px-3 py-2 text-base font-medium ${
+                  currentPage === link.page ? 'text-[#c5a47e] bg-[#faf9f6]' : 'text-[#1a1a1a]'
+                }`}
+                onClick={(e) => handleLinkClick(e, link.page)}
               >
                 {link.name}
               </a>
             ))}
-            <a
-              href="#booking"
-              className="block px-3 py-2 text-base font-bold text-[#c5a47e]"
-              onClick={() => setIsOpen(false)}
+            <button
+              className="w-full text-left px-3 py-2 text-base font-bold text-[#c5a47e]"
+              onClick={() => {
+                onNavigate('booking');
+                setIsOpen(false);
+              }}
             >
               Book Now
-            </a>
+            </button>
           </div>
         </div>
       )}
